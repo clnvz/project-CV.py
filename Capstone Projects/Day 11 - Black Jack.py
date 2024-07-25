@@ -44,17 +44,15 @@ def play_blackjack():
     user_score=int(first_udraw)
     com_score=int(first_cdraw)
     
-#SECOND DRAW ONWARDS      
+#USER SECOND DRAW ONWARDS      
     flag_again=True
     while flag_again==True:
         next_udraw=draw_one()
         user_cards.append(next_udraw)
         user_score=sum(user_cards)
 
-#COM BLACKJACK
+#EARLY BUST (USER)
         if user_score>21 and len(user_cards)==2:
-            flag_again=False
-        elif com_score==21 and len(com_cards)==2:
             flag_again=False
         else:
 
@@ -72,29 +70,38 @@ def play_blackjack():
             elif user_score<21:
                 print(f"     Your cards: {user_cards}, current score: {user_score}")
                 print(f"     Computer's first card: {com_cards[0]}")
-                draw_again = input("Type 'y' to get another card, type 'n' to pass: ")
+                draw_again = input("Type 'y' to get another card, type 'n' to pass: ").lower()
                 if draw_again=="y":
                     flag_again=True
                 elif draw_again=="n":
                     flag_again=False
     
-#COMPUTER HIDDEN ADVANTAGE
+#COMPUTER'S TURN TO DRAW
     com_advantage=True
-    if len(user_cards)==2 and user_score>=21: 
-            com_advantage=False
-    else: #if user is not blackjack or 2-card bust
-        while com_advantage==True:
+    while com_advantage==True:
+        print(com_cards)
+        if len(user_cards)==2 and user_score==21:
+                com_advantage=False
+        else:
             if com_score<17:
-                next_cdraw=draw_one() #com
+                next_cdraw=draw_one()
                 com_cards.append(next_cdraw)
                 com_score=sum(com_cards)
-                if com_score>=17:
+#EARLY BUST (COM)                
+                if len(com_cards)==2 and com_score==22:
+                    com_cards[1]=1
+                    com_score=sum(com_cards)
+                
+            elif com_score>=17:
+                if 1 not in com_cards:
                     if 11 in com_cards and com_score>21:
                         com_cards.remove(11)
                         com_cards.append(1)
                         com_score=sum(com_cards)
                     else:
                         com_advantage=False
+                else:
+                    com_advantage=False
         
 #FINAL RESULT
     print(f"     Your final hand: {user_cards}, final score: {user_score}")
