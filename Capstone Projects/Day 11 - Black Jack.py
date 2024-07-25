@@ -79,7 +79,6 @@ def play_blackjack():
 #COMPUTER'S TURN TO DRAW
     com_advantage=True
     while com_advantage==True:
-        print(com_cards)
         if len(user_cards)==2 and user_score==21:
                 com_advantage=False
         else:
@@ -93,15 +92,16 @@ def play_blackjack():
                     com_score=sum(com_cards)
                 
             elif com_score>=17:
-                if 1 not in com_cards:
-                    if 11 in com_cards and com_score>21:
-                        com_cards.remove(11)
-                        com_cards.append(1)
-                        com_score=sum(com_cards)
-                    else:
-                        com_advantage=False
+                # if 1 not in com_cards: 
+                # ^^^ activates Rule: one Ace-to-1 conversion only ( indent line 97-104 )
+                if 11 in com_cards and com_score>21:
+                    com_cards.remove(11)
+                    com_cards.append(1)
+                    com_score=sum(com_cards)
                 else:
                     com_advantage=False
+            else:
+                com_advantage=False
         
 #FINAL RESULT
     print(f"     Your final hand: {user_cards}, final score: {user_score}")
