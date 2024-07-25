@@ -37,22 +37,19 @@ def play_blackjack():
     com_cards=[]
 
 #FIRST DRAW
-    first_udraw=draw_one() #user
+    first_udraw=draw_one()
     user_cards.append(first_udraw)
-    first_cdraw=draw_one() #com
+    first_cdraw=draw_one()
     com_cards.append(first_cdraw)
-    user_score=int(first_udraw) #tally user
-    com_score=int(first_cdraw) #tally com
+    user_score=int(first_udraw)
+    com_score=int(first_cdraw)
     
 #SECOND DRAW ONWARDS      
     flag_again=True
     while flag_again==True:
-        next_udraw=draw_one() #user
+        next_udraw=draw_one()
         user_cards.append(next_udraw)
-        next_cdraw=draw_one() #com
-        com_cards.append(next_cdraw)
-        user_score=sum(user_cards) #tally user
-        com_score=sum(com_cards)  #tally com
+        user_score=sum(user_cards)
 
 #COM BLACKJACK
         if user_score>21 and len(user_cards)==2:
@@ -70,6 +67,7 @@ def play_blackjack():
 #USER SCORE >= 21
             if user_score>=21:
                 flag_again=False
+                
 #DRAW AGAIN       
             elif user_score<21:
                 print(f"     Your cards: {user_cards}, current score: {user_score}")
@@ -82,23 +80,29 @@ def play_blackjack():
     
 #COMPUTER HIDDEN ADVANTAGE
     com_advantage=True
-    while com_score<17:
-        if 11 in com_cards and com_score>21:
-            com_cards.remove(11)
-            com_cards.append(1)
-            com_score=sum(com_cards)
-            
-        next_cdraw=draw_one() #com
-        com_cards.append(next_cdraw)
-        com_score=sum(com_cards)
-        if com_score>=17:
+    if len(user_cards)==2 and user_score>=21: 
             com_advantage=False
+    else: #if user is not blackjack or 2-card bust
+        while com_advantage==True:
+            if com_score<17:
+                if 11 in com_cards and com_score>21:
+                    com_cards.remove(11)
+                    com_cards.append(1)
+                    com_score=sum(com_cards)
+                    
+                next_cdraw=draw_one() #com
+                com_cards.append(next_cdraw)
+                com_score=sum(com_cards)
+                if com_score>=17:
+                    com_advantage=False
         
 #FINAL RESULT
     print(f"     Your final hand: {user_cards}, final score: {user_score}")
     print(f"     Computer's final hand: {com_cards}, final score: {com_score}")
 
-    if user_score<com_score and com_score<22 or user_score>21:
+    if user_score==com_score:
+        print("It's a draw")
+    elif user_score<com_score and com_score<22 or user_score>21:
         if com_score==21 and len(com_cards)==2:
             print("Computer got a BLACKJACK !!! You lose")
         elif user_score>21:
@@ -113,9 +117,7 @@ def play_blackjack():
                 print("You win")
         else:
             print("You win")
-    elif user_score==com_score:
-        print("It's a draw")
-
+    
 #PLAY AGAIN?
     if input("Do you want to play a game of Blackjack? Type 'y' or 'n': ").lower() == "y":
         play_blackjack()
