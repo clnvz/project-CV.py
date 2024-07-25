@@ -66,9 +66,12 @@ def play_blackjack():
                 user_cards.remove(11)
                 user_cards.append(1)
                 user_score=sum(user_cards)
-    
+
+#USER SCORE >= 21
+            if user_score>=21:
+                flag_again=False
 #DRAW AGAIN       
-            if user_score<21:
+            elif user_score<21:
                 print(f"     Your cards: {user_cards}, current score: {user_score}")
                 print(f"     Computer's first card: {com_cards[0]}")
                 draw_again = input("Type 'y' to get another card, type 'n' to pass: ")
@@ -77,16 +80,20 @@ def play_blackjack():
                 elif draw_again=="n":
                     flag_again=False
     
-#USER SCORE >= 21
-            elif user_score>=21:
-                flag_again=False
-    
 #COMPUTER HIDDEN ADVANTAGE
-    if 11 in com_cards and com_score>21:
-        com_cards.remove(11)
-        com_cards.append(1)
+    com_advantage=True
+    while com_score<17:
+        if 11 in com_cards and com_score>21:
+            com_cards.remove(11)
+            com_cards.append(1)
+            com_score=sum(com_cards)
+            
+        next_cdraw=draw_one() #com
+        com_cards.append(next_cdraw)
         com_score=sum(com_cards)
-    
+        if com_score>=17:
+            com_advantage=False
+        
 #FINAL RESULT
     print(f"     Your final hand: {user_cards}, final score: {user_score}")
     print(f"     Computer's final hand: {com_cards}, final score: {com_score}")
