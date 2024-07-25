@@ -85,16 +85,16 @@ def play_blackjack():
     else: #if user is not blackjack or 2-card bust
         while com_advantage==True:
             if com_score<17:
-                if 11 in com_cards and com_score>21:
-                    com_cards.remove(11)
-                    com_cards.append(1)
-                    com_score=sum(com_cards)
-                    
                 next_cdraw=draw_one() #com
                 com_cards.append(next_cdraw)
                 com_score=sum(com_cards)
                 if com_score>=17:
-                    com_advantage=False
+                    if 11 in com_cards and com_score>21:
+                        com_cards.remove(11)
+                        com_cards.append(1)
+                        com_score=sum(com_cards)
+                    else:
+                        com_advantage=False
         
 #FINAL RESULT
     print(f"     Your final hand: {user_cards}, final score: {user_score}")
