@@ -54,7 +54,6 @@ while is_right == True:
         else:
             PA = PB
     else:
-
         is_right = False
 
 # system('cls') #This doesn't work on my laptop. Help :(
