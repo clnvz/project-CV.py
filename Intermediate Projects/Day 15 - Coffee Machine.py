@@ -45,6 +45,8 @@ while coffee_machine == True:
     customer_choice = input("What would you like? (espresso/latte/cappuccino): ").lower()
     if customer_choice == "report":
         give_report(profit)
+    elif customer_choice == "off":
+        coffee_machine = False
     else:
         inventory = check_resources(customer_choice)
         if inventory == 0:
