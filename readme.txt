@@ -1,4 +1,4 @@
-Hello! This is where I compile all the programs I made while self-learning Python!
+Hello! This is where I compile all the programs I have done making as I self-learn Python!
 
 Just a few notes for this repository:
 
