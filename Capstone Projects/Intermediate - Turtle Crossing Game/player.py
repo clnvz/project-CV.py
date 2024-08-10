@@ -12,10 +12,7 @@ class Player(Turtle):
         self.color(player_color)
         self.penup()
         self.seth(90)
-
-        self.x_coor = 0
-        self.y_coor = -self.edge + 40
-        self.move_player()
+        self.refresh()
 
     def refresh(self):
         self.x_coor = 0
