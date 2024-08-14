@@ -1,6 +1,6 @@
 Hello! This is where I compile all the programs I have done making as I self-learn Python!
 
-Learned: OOP, pandas
+Learned: OOP, pandas, list/dict comprehension
 
 Just a few notes for this repository:
 
