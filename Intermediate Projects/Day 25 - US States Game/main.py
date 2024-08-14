@@ -43,10 +43,7 @@ while len(done_guessing) < 50:
         all_states_list.remove(answer)
         done_guessing.append(answer)
     elif answer == "Exit":
-        not_guessed = []
-        for state in all_states_list:
-            if state not in done_guessing:
-                not_guessed.append(state)
+        not_guessed = [state for state in all_states_list if state not in done_guessing]
         pandas.DataFrame(not_guessed).to_csv("pending_guesses.csv")
         break
     elif answer in done_guessing:
