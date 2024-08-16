@@ -31,13 +31,13 @@ def start_timer():
 
     if reps % 8 == 0:  # Long Break
         count_down(LONG_BREAK_MIN * 60)
-        top_text.config(text="Break", fg=RED, font=(FONT_NAME, 35, "bold"))
+        top_text.config(text="Break", fg=RED)
     elif reps % 2 == 0:  # Short Break
         count_down(SHORT_BREAK_MIN * 60)
-        top_text.config(text="Break", fg=PINK, font=(FONT_NAME, 35, "bold"))
+        top_text.config(text="Break", fg=PINK)
     else:  # Work
         count_down(WORK_MIN * 60)
-        top_text.config(text="Work", fg=GREEN, font=(FONT_NAME, 35, "bold"))
+        top_text.config(text="Work", fg=GREEN)
 
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
