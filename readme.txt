@@ -5,6 +5,7 @@ Skills learned:
  #2 pandas (starts at Day 25)
  #3 list/dict comprehension
  #4 tkinter(GUI) (starts at Day 27)
+ #5 json / pyperclip (starts at Day 29)
 
 Project ideas came from a Udemy course (100 Days of Python by Angela Yu)
 NOTE:
